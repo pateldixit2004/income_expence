@@ -18,14 +18,14 @@ class DBhelper
       }
     else
       {
-        await intDb();
+        return await intDb();
       }
   }
 
   Future<Database> intDb()
   async {
     Directory dir=await getApplicationDocumentsDirectory();
-    String path=join(await getDatabasesPath(), Dbpath);
+    String path=join(dir.path, Dbpath);
 
     return await openDatabase(path,version: 1,onCreate: (db, version) async {
       return await db.execute('CREATE TABLE datatable(id INTEGER PRIMARY KEY AUTOINCREMATE ,amount INTEGER ,note TEXT)');
@@ -35,6 +35,7 @@ class DBhelper
   Future<int> insertdb({note,amount})
   async {
     // database=await  instance.da
+    database=await createDb();
         return await  database!.insert('datatable', {"note":note,"amount":amount});
   }
 }
