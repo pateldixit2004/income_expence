@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:income_expence/screen/model.dart';
 import 'package:income_expence/utils/db_helper.dart';
 
@@ -14,43 +13,55 @@ class IncomeScreen extends StatefulWidget {
 }
 
 class _IncomeScreenState extends State<IncomeScreen> {
-  TextEditingController txtamount=TextEditingController();
-  TextEditingController txtnotes=TextEditingController();
-  Incomecontroller controller =Get.put(Incomecontroller());
+  TextEditingController txtamount = TextEditingController();
+  TextEditingController txtnotes = TextEditingController();
+  Incomecontroller controller = Get.put(Incomecontroller());
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
-      appBar: AppBar(
-        title: Text("Income"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            buildTextField(hint: "Amount",inputype: TextInputType.number,controller: txtamount),
-            buildTextField(hint: "notes",inputype: TextInputType.text,controller: txtnotes),
-            ElevatedButton(onPressed: () {
-              IncomeModel model=IncomeModel(amount: int.parse(txtamount.text),note: txtnotes.text);
-              DBhelper.dBhelper.insertdb(model: model);
-              controller.getData();
-              Get.back();
-            }, child: Text("Sumit"))
-
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Income"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              buildTextField(
+                  hint: "Amount",
+                  inputype: TextInputType.number,
+                  controller: txtamount),
+              buildTextField(
+                  hint: "notes",
+                  inputype: TextInputType.text,
+                  controller: txtnotes),
+              ElevatedButton(
+                onPressed: () {
+                  IncomeModel model = IncomeModel(
+                      amount: int.parse(txtamount.text), note: txtnotes.text);
+                  DBhelper.dBhelper.insertdb(model: model);
+                  controller.getData();
+                  Get.back();
+                },
+                child: Text("Sumit"),
+              ),
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 
-  TextField buildTextField({hint,inputype,controller}) {
+  TextField buildTextField({hint, inputype, controller}) {
     return TextField(
       controller: controller,
-      keyboardType:inputype ,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: "$hint",
-            label: Text("$hint"),
-          ),
-        );
+      keyboardType: inputype,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: "$hint",
+        label: Text("$hint"),
+      ),
+    );
   }
 }
