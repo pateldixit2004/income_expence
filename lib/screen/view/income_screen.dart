@@ -23,6 +23,14 @@ class _IncomeScreenState extends State<IncomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Income"),
+          actions: [
+            IconButton(onPressed: () async {
+
+              DateTime? picker=await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050));
+              controller.datetime.value=controller.setDateFormat(picker!);
+
+            }, icon: Icon(Icons.calendar_month),),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

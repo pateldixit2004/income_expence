@@ -23,11 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(child: Scaffold(
       body: Obx(
         () =>  ListView.builder(itemBuilder: (context, index) {
-          return ListTile(
-            title:  Text("${controller.dataList[index]['note']}"),
-            trailing:  Text("${controller.dataList[index]['amount']}"),
-
-          );
+          // return ListTile(
+          //   title:  Text("${controller.dataList[index]['note']}"),
+          //   trailing:  Text("${controller.dataList[index]['amount']}"),
+          //
+          // );
 
         },itemCount: controller.dataList.length,),
       ),
