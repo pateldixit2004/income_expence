@@ -32,7 +32,6 @@ class Incomecontroller extends GetxController
     'Education',"Food","Home maintance","Salary","Investment"
   ].obs;
 
-  RxString? selctExpance;
-
+  RxString selctExpance="Income".obs;
 
 }

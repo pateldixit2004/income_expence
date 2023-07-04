@@ -100,6 +100,21 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 },
                 child: Text("Sumit"),
               ),
+
+              Obx(() =>  RadioListTile(value: "Income", groupValue: controller.selctExpance.value, onChanged:(value) {
+                  // controller.changeIncome(value!);
+                  controller.selctExpance.value=value! ;
+                }, title:Text( "Income"),),
+              ),
+              Obx(
+                () =>  RadioListTile(value: "Expance", groupValue: controller.selctExpance.value, onChanged:(value) {
+                  controller.selctExpance.value=value!;
+                  // controller.changeIncome(value!);
+                },title: Text( "expance"),),
+              ),
+
+
+
               // Container(
               //   height: 200,
               //   child: Column(
