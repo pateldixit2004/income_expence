@@ -4,6 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:income_expence/screen/model.dart';
 import 'package:income_expence/utils/db_helper.dart';
 
+import '../controller/income_controller.dart';
+
 class IncomeScreen extends StatefulWidget {
   const IncomeScreen({Key? key}) : super(key: key);
 
@@ -14,6 +16,7 @@ class IncomeScreen extends StatefulWidget {
 class _IncomeScreenState extends State<IncomeScreen> {
   TextEditingController txtamount=TextEditingController();
   TextEditingController txtnotes=TextEditingController();
+  Incomecontroller controller =Get.put(Incomecontroller());
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
@@ -29,6 +32,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
             ElevatedButton(onPressed: () {
               IncomeModel model=IncomeModel(amount: int.parse(txtamount.text),note: txtnotes.text);
               DBhelper.dBhelper.insertdb(model: model);
+              controller.getData();
               Get.back();
             }, child: Text("Sumit"))
 
