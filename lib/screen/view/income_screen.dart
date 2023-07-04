@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:income_expence/screen/model.dart';
 import 'package:income_expence/utils/db_helper.dart';
 
 class IncomeScreen extends StatefulWidget {
@@ -10,6 +13,7 @@ class IncomeScreen extends StatefulWidget {
 
 class _IncomeScreenState extends State<IncomeScreen> {
   TextEditingController txtamount=TextEditingController();
+  TextEditingController txtnotes=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
@@ -21,10 +25,11 @@ class _IncomeScreenState extends State<IncomeScreen> {
         child: Column(
           children: [
             buildTextField(hint: "Amount",inputype: TextInputType.number,controller: txtamount),
+            buildTextField(hint: "notes",inputype: TextInputType.text,controller: txtnotes),
             ElevatedButton(onPressed: () {
-              DBhelper.dBhelper.insertdb(
-                amount: int.parse(txtamount.text),
-              );
+              IncomeModel model=IncomeModel(amount: int.parse(txtamount.text),note: txtnotes.text);
+              DBhelper.dBhelper.insertdb(model: model);
+              Get.back();
             }, child: Text("Sumit"))
 
           ],
