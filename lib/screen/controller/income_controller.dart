@@ -18,11 +18,7 @@ class Incomecontroller extends GetxController
     postDate=dataTime.obs;
   }
 
-  // String setDateFormat(DateTime dm)
-  // {
-  //   var f =  DateFormat("dd-mm-yyyy");
-  //   return f.format(dm);
-  // }
+
   // String setDateFormat(DateTime dm)
   // {
   //   var f = DateFormat("dd-MM-yyyy");

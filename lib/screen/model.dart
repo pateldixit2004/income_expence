@@ -1,7 +1,7 @@
 class IncomeModel
 {
-  int?  amount;
+  int?  amount,id;
   String? note;
 
-  IncomeModel({this.amount, this.note});
+  IncomeModel({this.id,this.amount, this.note});
 }

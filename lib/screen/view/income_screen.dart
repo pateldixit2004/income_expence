@@ -18,12 +18,26 @@ class _IncomeScreenState extends State<IncomeScreen> {
   Incomecontroller controller = Get.put(Incomecontroller());
   String selct = 'Income';
 
+
+  Map m1={};
+  @override
+  void initState() {
+        super.initState();
+        m1=Get.arguments;
+        if(m1['option']==0)
+          {
+            int index=m1['index'];
+            txtamount=TextEditingController(text: "${controller.dataList[index]['amount']}");
+            txtnotes=TextEditingController(text: controller.dataList[index]['note']);
+          }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Income"),
+          title: Text(m1["option"]==0?"update":"Income"),
           actions: [
             IconButton(
               onPressed: () async {
@@ -48,10 +62,11 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2050));
+                      controller.datetime.value=picker as String;
                       // controller.dateTime.value =
                       //     controller.setDateFormat(picker!);
                     },
-                    child: Obx(() => Text("${controller.datetime}"))),
+                    child: Obx(() => Text("${controller.datetime.value}"))),
               ),
               buildTextField(
                   hint: "Amount",
@@ -63,69 +78,84 @@ class _IncomeScreenState extends State<IncomeScreen> {
                   controller: txtnotes),
               ElevatedButton(
                 onPressed: () {
-                  IncomeModel model = IncomeModel(
-                      amount: int.parse(txtamount.text), note: txtnotes.text);
-                  DBhelper.dBhelper.insertdb(model: model);
+
+                  if(m1["option"]==0)
+                    {
+                      IncomeModel model=IncomeModel(id: controller.dataList[m1['index']['id']],amount: int.parse(txtamount.text),note: txtnotes.text);
+                      DBhelper.dBhelper.update(model);
+                    }
+
+
+                  else{
+                    IncomeModel model = IncomeModel(
+                        amount: int.parse(txtamount.text), note: txtnotes.text);
+                    DBhelper.dBhelper.insertdb(model: model);
+                  }
+
+
+
+
                   controller.getData();
                   Get.back();
                 },
                 child: Text("Sumit"),
               ),
-              Container(
-                height: 200,
-                child: Column(
-                  children: [
-                    RadioListTile(
-                      value: "Income",
-                      groupValue: selct,
-                      onChanged: (value) {
-                        setState(() {
-                          selct = value!;
-                        });
-                      },
-                      title: Text("Income"),
-                    ),
-                    ListTile(
-                      title: Text("Expance/income"),
-                    ),
-                    // Obx(
-                    //       () =>
-                    //       DropdownButton(
-                    //         value: controller.selctExpance,
-                    //         items: controller.expanceList.map((element) =>
-                    //             DropdownMenuItem(child: Center(
-                    //               child: Text("$element"),), value: element,),),
-                    //         onChanged: (value) {
-                    //           controller.selctExpance.value = value! as String;
-                    //         },),
-                    // ),
-
-                    Obx(
-                      () =>  DropdownButton(
-                          items: controller.expanceList.value.map((e) =>
-                              DropdownMenuItem(child: Center(child: Text("$e"),),
-                                value: e,)).toList(),
-                          value: controller.selctExpance,
-                          onChanged: (value) {
-                            controller.selctExpance!.value=value as String;
-                          },),
-                    ),
-
-                    RadioListTile(
-                      value: "Expance",
-                      groupValue: selct,
-                      onChanged: (value) {
-                        setState(() {
-                          selct = value!;
-                        });
-                      },
-                      title: Text("Expance"),
-                    ),
-
-                  ],
-                ),
-              )
+              // Container(
+              //   height: 200,
+              //   child: Column(
+              //     children: [
+              //       RadioListTile(
+              //         value: "Income",
+              //         groupValue: selct,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             selct = value!;
+              //           });
+              //         },
+              //         title: Text("Income"),
+              //       ),
+              //       ListTile(
+              //         title: Text("Expance/income"),
+              //       ),
+              //       // Obx(
+              //       //       () =>
+              //       //       DropdownButton(
+              //       //         value: controller.selctExpance,
+              //       //         items: controller.expanceList.map((element) =>
+              //       //             DropdownMenuItem(child: Center(
+              //       //               child: Text("$element"),), value: element,),),
+              //       //         onChanged: (value) {
+              //       //           controller.selctExpance.value = value! as String;
+              //       //         },),
+              //       // ),
+              //
+              //       Obx(
+              //         () =>  DropdownButton(
+              //             items: controller.expanceList.value.map((e) =>
+              //                 DropdownMenuItem(child: Center(child: Text("$e"),),
+              //                   value: e,)).toList(),
+              //             value: controller.selctExpance,
+              //             onChanged: (value) {
+              //               controller.selctExpance!.value=value as String;
+              //             },),
+              //       ),
+              //
+              //       RadioListTile(
+              //         value: "Expance",
+              //         groupValue: selct,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             selct = value!;
+              //           });
+              //         },
+              //         title: Text("Expance"),
+              //       ),
+              //
+              //     ],
+              //   ),
+              // )
             ],
+
           ),
         ),
       ),
