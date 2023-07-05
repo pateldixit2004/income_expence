@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Incomecontroller controller =Get.put(Incomecontroller());
   @override
   void initState() {
-
     super.initState();
     controller.getData();
   }
@@ -36,6 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Get.toNamed("/income",arguments: {"option":0,"index":index});
             },
             child: ListTile(
+              leading:  CircleAvatar(
+                radius: 50,
+                backgroundImage: MemoryImage(controller.dataList[index]['img']),
+              ),
               title:  Text("${controller.dataList[index]['note']}"),
               trailing:  Text("${controller.dataList[index]['amount']}"),
 

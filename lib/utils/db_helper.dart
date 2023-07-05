@@ -30,7 +30,7 @@ class DBhelper {
       version: 1,
       onCreate: (db, version) async {
         return await db.execute(
-            'CREATE TABLE $datatable(id INTEGER PRIMARY KEY AutoIncrement  ,$amount INTEGER ,$note TEXT)');
+            'CREATE TABLE $datatable(id INTEGER PRIMARY KEY AutoIncrement  ,$amount INTEGER ,$note TEXT,img BLOB)');
       },
     );
   }
@@ -39,7 +39,7 @@ class DBhelper {
     // database=await  instance.da
     database = await checkDb();
     await database!
-        .insert('$datatable', {"note": model!.note, "amount": model.amount});
+        .insert('$datatable', {"note": model!.note, "amount": model.amount,"img":model.imgUnit});
   }
 
   Future<List<Map>> readDb() async {
@@ -56,7 +56,7 @@ class DBhelper {
 
   Future<void> update(IncomeModel model) async {
     database = await checkDb();
-    database!.update(datatable, {"amount": model.amount, "note": model.note},
+    database!.update(datatable, {"amount": model.amount, "note": model.note,"img":model.imgUnit},
         where: "id=?", whereArgs: [model.id]);
   }
 }
