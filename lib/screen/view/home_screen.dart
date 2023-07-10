@@ -25,14 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:  Color(0xff429690),
+          backgroundColor: Color(0xff429690),
         ),
         body: Column(
           children: [
-            
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     height: 50,
@@ -43,7 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: Center(child: Text("income")),
                   ),
-                  SizedBox(width: 2.w,),
+                  SizedBox(
+                    width: 2.w,
+                  ),
                   Container(
                     height: 50,
                     width: 45.w,
@@ -52,15 +54,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.red,
                     ),
                     child: Center(child: Text("Exoance")),
-
                   )
                 ],
               ),
             ),
-           ListTile(
-             leading:  Text("Transaction history",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),
-             trailing: Text("see all",style: TextStyle(fontSize: 15),),
-           ),
+            ListTile(
+              leading: Text("Transaction history",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold)),
+              trailing: Text(
+                "see all",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
             Obx(
               () => Expanded(
                 child: ListView.builder(
@@ -84,12 +92,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           //       MemoryImage(controller.dataList[index]['img']),
                           // ),
                           title: Text("${controller.dataList[index]['note']}"),
-                          leading: Text(controller.selctExpance.value),
-                          subtitle: Text("${controller.datetime}"),
+                          // leading: Text(
+                          //   controller.dataList[index]['status'],
+                          //   style: TextStyle(
+                          //       color: controller.dataList[index]['status'] ==
+                          //               "Income"
+                          //           ? Colors.green
+                          //           : Colors.red),
+                          // ),
+                          subtitle:
+                              Text("${controller.dataList[index]['data']}"),
                           trailing:
-                              Text("${controller.dataList[index]['amount']}"),
+                              Text("₹ ${controller.dataList[index]['amount']}", style: TextStyle(
+                        color: controller.dataList[index]['status'] ==
+                                "Income"
+                            ? Colors.green
+                            : Colors.red,fontWeight: FontWeight.bold),
                         ),
-                      ),
+                        ),
+                      )
                     );
                   },
                   itemCount: controller.dataList.length,
