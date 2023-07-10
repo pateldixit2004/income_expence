@@ -27,6 +27,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
   void initState() {
     super.initState();
     m1 = Get.arguments;
+    controller.imgPath!.value = "";
     if (m1['option'] == 0) {
       int index = m1['index'];
       txtamount = TextEditingController(
@@ -57,10 +58,24 @@ class _IncomeScreenState extends State<IncomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage:
-                      FileImage(File("${controller.imgPath!.value}")),
+                Obx(
+                  () => controller.imgPath!.isNotEmpty
+                      ? CircleAvatar(
+                          radius: 50,
+                          backgroundImage:
+                              FileImage(File("${controller.imgPath!.value}")),
+                        )
+                      : m1["option"] == 0
+                          ? CircleAvatar(
+                              radius: 50,
+                              backgroundImage: MemoryImage(
+                                  controller.dataList[m1['index']]['img']),
+                            )
+                          : CircleAvatar(
+                              radius: 50,
+                              backgroundImage: FileImage(
+                                  File("${controller.imgPath!.value}")),
+                            ),
                 ),
                 IconButton(
                     onPressed: () async {
@@ -126,11 +141,18 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ElevatedButton(
                   onPressed: () {
                     if (m1["option"] == 0) {
+
+                      if(controller.imgPath!.value.isEmpty)
+                        {
+                          controller.imgUnit = controller.dataList[m1['index']]['img'];
+                        }
+
                       IncomeModel model = IncomeModel(
-                          id: controller.dataList[m1['index']['id']],
-                          amount: int.parse(txtamount.text),
-                          note: txtnotes.text,
-                          imgUnit: controller.imgUnit);
+                        id: controller.dataList[m1['index']]['id'],
+                        amount: int.parse(txtamount.text),
+                        note: txtnotes.text,
+                        imgUnit: controller.imgUnit,
+                      );
                       DBhelper.dBhelper.update(model);
                     } else {
                       IncomeModel model = IncomeModel(
