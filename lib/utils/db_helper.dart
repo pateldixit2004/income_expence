@@ -12,6 +12,9 @@ class DBhelper {
   String datatable = 'datatable';
   String amount = 'amount';
   String note = "note";
+  String data = "data";
+  String time = "time";
+  String status = "status";
 
   Future<Database?> checkDb() async {
     if (database != null) {
@@ -30,7 +33,7 @@ class DBhelper {
       version: 1,
       onCreate: (db, version) async {
         return await db.execute(
-            'CREATE TABLE $datatable(id INTEGER PRIMARY KEY AutoIncrement  ,$amount INTEGER ,$note TEXT,img BLOB)');
+            'CREATE TABLE $datatable(id INTEGER PRIMARY KEY AutoIncrement  ,$amount INTEGER ,$note TEXT,img BLOB,$data TEXT,$time TEXT ,$status TEXT)');
       },
     );
   }
@@ -39,7 +42,7 @@ class DBhelper {
     // database=await  instance.da
     database = await checkDb();
     await database!
-        .insert('$datatable', {"note": model!.note, "amount": model.amount,"img":model.imgUnit});
+        .insert('$datatable', {"note": model!.note, "amount": model.amount,"img":model.imgUnit,"data":model.date,"time":model.time,"status":model.status});
   }
 
   Future<List<Map>> readDb() async {
@@ -56,7 +59,6 @@ class DBhelper {
 
   Future<void> update(IncomeModel model) async {
     database = await checkDb();
-    database!.update(datatable, {"amount": model.amount, "note": model.note,"img":model.imgUnit},
-        where: "id=?", whereArgs: [model.id]);
+    database!.update(datatable, {"amount": model.amount, "note": model.note,"img":model.imgUnit,"data":model.date,"time":model.time,"status":model.status}, where: "id=?", whereArgs: [model.id]);
   }
 }

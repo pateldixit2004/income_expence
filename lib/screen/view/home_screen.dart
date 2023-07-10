@@ -25,10 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-
+          backgroundColor:  Color(0xff429690),
         ),
         body: Column(
           children: [
+            
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.green,
                     ),
-                    child: Text("income"),
+                    child: Center(child: Text("income")),
                   ),
                   SizedBox(width: 2.w,),
                   Container(
@@ -50,12 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.red,
                     ),
-                    child: Text("Exoance"),
+                    child: Center(child: Text("Exoance")),
 
                   )
                 ],
               ),
             ),
+           ListTile(
+             leading:  Text("Transaction history",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),
+             trailing: Text("see all",style: TextStyle(fontSize: 15),),
+           ),
             Obx(
               () => Expanded(
                 child: ListView.builder(
@@ -70,16 +75,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         Get.toNamed("/income",
                             arguments: {"option": 0, "index": index});
                       },
-                      child: ListTile(
-                        // leading: CircleAvatar(
-                        //   radius: 50,
-                        //   backgroundImage:
-                        //       MemoryImage(controller.dataList[index]['img']),
-                        // ),
-                        title: Text("${controller.dataList[index]['note']}"),
-                        subtitle: Text("${controller.datetime}"),
-                        trailing:
-                            Text("${controller.dataList[index]['amount']}"),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          // leading: CircleAvatar(
+                          //   radius: 50,
+                          //   backgroundImage:
+                          //       MemoryImage(controller.dataList[index]['img']),
+                          // ),
+                          title: Text("${controller.dataList[index]['note']}"),
+                          leading: Text(controller.selctExpance.value),
+                          subtitle: Text("${controller.datetime}"),
+                          trailing:
+                              Text("${controller.dataList[index]['amount']}"),
+                        ),
                       ),
                     );
                   },
@@ -89,12 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed("/income", arguments: {"option": 1, "index": null});
-          },
-          child: Icon(Icons.add),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     Get.toNamed("/income", arguments: {"option": 1, "index": null});
+        //   },
+        //   child: Icon(Icons.add),
+        // ),
       ),
     );
   }

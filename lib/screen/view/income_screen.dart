@@ -42,6 +42,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor:  Color(0xff429690),
           title: Text(m1["option"] == 0 ? "update" : "Income"),
           actions: [
             IconButton(
@@ -63,6 +64,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+
                 /*image*/
                 // Obx(
                 //   () => controller.imgPath!.isNotEmpty
@@ -83,16 +85,17 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 //                   File("${controller.imgPath!.value}")),
                 //             ),
                 // ),
-                IconButton(
-                    onPressed: () async {
-                      ImagePicker picker = ImagePicker();
-                      XFile? xfile = await picker.pickImage(
-                          source: ImageSource.camera, imageQuality: 20);
-                      controller.imgUnit = await xfile!.readAsBytes();
-
-                      controller.imgPath!.value = xfile.path;
-                    },
-                    icon: Icon(Icons.camera)),
+                /*icon*/
+                // IconButton(
+                //     onPressed: () async {
+                //       ImagePicker picker = ImagePicker();
+                //       XFile? xfile = await picker.pickImage(
+                //           source: ImageSource.camera, imageQuality: 20);
+                //       controller.imgUnit = await xfile!.readAsBytes();
+                //
+                //       controller.imgPath!.value = xfile.path;
+                //     },
+                //     icon: Icon(Icons.camera)),
 
                 /*DAte in contenaier*/
                 // Container(
@@ -124,6 +127,10 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     hint: "notes",
                     inputype: TextInputType.text,
                     controller: txtnotes),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(leading: Text("Date",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -142,6 +149,11 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     Obx(() =>  Text("${controller.datetime.value}")),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(leading: Text("Time",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -155,6 +167,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     Text("${controller.timeOfDay}"),
                   ],
                 ),
+                ListTile(leading: Text("Staus",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),),
 
                 Obx(
                   () => RadioListTile(
@@ -192,6 +205,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                         amount: int.parse(txtamount.text),
                         note: txtnotes.text,
                         date: controller.datetime.value,
+                        status: controller.selctExpance.value,
                         imgUnit: controller.imgUnit,
                       );
                       DBhelper.dBhelper.update(model);
@@ -200,6 +214,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           amount: int.parse(txtamount.text),
                           note: txtnotes.text,
                           // date: "${controller.postDate}",
+                          status: controller.selctExpance.value,
                           date: controller.datetime.value,
                           imgUnit: controller.imgUnit);
                       DBhelper.dBhelper.insertdb(model: model);
@@ -208,7 +223,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     controller.getData();
                     Get.back();
                   },
-                  child: Text("Sumit"),
+                  child: Text("Sumit"),style: ElevatedButton.styleFrom(backgroundColor:   Color(0xff429690),),
                 ),
 
                 // Container(
