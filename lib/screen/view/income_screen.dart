@@ -205,6 +205,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                         amount: int.parse(txtamount.text),
                         note: txtnotes.text,
                         date: controller.datetime.value,
+                        time: "${controller.timeOfDay}",
                         status: controller.selctExpance.value,
                         imgUnit: controller.imgUnit,
                       );
@@ -215,6 +216,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           note: txtnotes.text,
                           // date: "${controller.postDate}",
                           status: controller.selctExpance.value,
+                          time: "${controller.timeOfDay}",
                           date: controller.datetime.value,
                           imgUnit: controller.imgUnit);
                       DBhelper.dBhelper.insertdb(model: model);
