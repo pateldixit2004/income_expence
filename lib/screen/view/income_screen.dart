@@ -46,8 +46,13 @@ class _IncomeScreenState extends State<IncomeScreen> {
           actions: [
             IconButton(
               onPressed: () async {
-                // DateTime? picker=await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2050));
-                // controller.datetime.value=controller.setDateFormat(picker!);
+                DateTime? picker = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2050));
+                // controller.datetime.value = picker as String;
+                controller.datetime.value=controller.setDateFormat(picker!);
               },
               icon: Icon(Icons.calendar_month),
             ),
@@ -58,25 +63,26 @@ class _IncomeScreenState extends State<IncomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Obx(
-                  () => controller.imgPath!.isNotEmpty
-                      ? CircleAvatar(
-                          radius: 50,
-                          backgroundImage:
-                              FileImage(File("${controller.imgPath!.value}")),
-                        )
-                      : m1["option"] == 0
-                          ? CircleAvatar(
-                              radius: 50,
-                              backgroundImage: MemoryImage(
-                                  controller.dataList[m1['index']]['img']),
-                            )
-                          : CircleAvatar(
-                              radius: 50,
-                              backgroundImage: FileImage(
-                                  File("${controller.imgPath!.value}")),
-                            ),
-                ),
+                /*image*/
+                // Obx(
+                //   () => controller.imgPath!.isNotEmpty
+                //       ? CircleAvatar(
+                //           radius: 50,
+                //           backgroundImage:
+                //               FileImage(File("${controller.imgPath!.value}")),
+                //         )
+                //       : m1["option"] == 0
+                //           ? CircleAvatar(
+                //               radius: 50,
+                //               backgroundImage: MemoryImage(
+                //                   controller.dataList[m1['index']]['img']),
+                //             )
+                //           : CircleAvatar(
+                //               radius: 50,
+                //               backgroundImage: FileImage(
+                //                   File("${controller.imgPath!.value}")),
+                //             ),
+                // ),
                 IconButton(
                     onPressed: () async {
                       ImagePicker picker = ImagePicker();
@@ -88,6 +94,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     },
                     icon: Icon(Icons.camera)),
 
+                /*DAte in contenaier*/
                 // Container(
                 //   height: 100,
                 //   width: 100,
@@ -98,7 +105,8 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 //             initialDate: DateTime.now(),
                 //             firstDate: DateTime(2000),
                 //             lastDate: DateTime(2050));
-                //         controller.datetime.value = picker as String;
+                //         // controller.datetime.value = picker as String;
+                //         controller.datetime.value=controller.setDateFormat(picker!);
                 //         // controller.dateTime.value =
                 //         //     controller.setDateFormat(picker!);
                 //       },
@@ -116,6 +124,38 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     hint: "notes",
                     inputype: TextInputType.text,
                     controller: txtnotes),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        DateTime? picker = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2050));
+                        // controller.datetime.value = picker as String;
+                        controller.datetime.value=controller.setDateFormat(picker!);
+                      },
+                      icon: Icon(Icons.calendar_month),
+                    ),
+                    Obx(() =>  Text("${controller.datetime.value}")),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        TimeOfDay? t1=await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                        controller.changetime(t1!);
+                      },
+                      icon: Icon(Icons.watch_later_outlined),
+                    ),
+                    Text("${controller.timeOfDay}"),
+                  ],
+                ),
+
                 Obx(
                   () => RadioListTile(
                     value: "Income",
@@ -151,6 +191,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                         id: controller.dataList[m1['index']]['id'],
                         amount: int.parse(txtamount.text),
                         note: txtnotes.text,
+                        date: controller.datetime.value,
                         imgUnit: controller.imgUnit,
                       );
                       DBhelper.dBhelper.update(model);
@@ -158,10 +199,12 @@ class _IncomeScreenState extends State<IncomeScreen> {
                       IncomeModel model = IncomeModel(
                           amount: int.parse(txtamount.text),
                           note: txtnotes.text,
+                          // date: "${controller.postDate}",
+                          date: controller.datetime.value,
                           imgUnit: controller.imgUnit);
                       DBhelper.dBhelper.insertdb(model: model);
                     }
-                    print("hello");
+                    // print("hello");
                     controller.getData();
                     Get.back();
                   },

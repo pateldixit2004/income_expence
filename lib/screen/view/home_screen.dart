@@ -71,12 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             arguments: {"option": 0, "index": index});
                       },
                       child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 50,
-                          backgroundImage:
-                              MemoryImage(controller.dataList[index]['img']),
-                        ),
+                        // leading: CircleAvatar(
+                        //   radius: 50,
+                        //   backgroundImage:
+                        //       MemoryImage(controller.dataList[index]['img']),
+                        // ),
                         title: Text("${controller.dataList[index]['note']}"),
+                        subtitle: Text("${controller.datetime}"),
                         trailing:
                             Text("${controller.dataList[index]['amount']}"),
                       ),

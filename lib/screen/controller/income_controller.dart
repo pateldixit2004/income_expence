@@ -1,8 +1,11 @@
  import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:income_expence/utils/db_helper.dart';
+import 'package:intl/intl.dart';
+
 
 class Incomecontroller extends GetxController
 {
@@ -11,7 +14,7 @@ class Incomecontroller extends GetxController
 
 
   RxString? imgPath="".obs;
-  Uint8List?  imgUnit;
+  Uint8List  imgUnit=Uint8List(10);
 
   Future<void> getData()
   async {
@@ -27,11 +30,18 @@ class Incomecontroller extends GetxController
   }
 
 
-  // String setDateFormat(DateTime dm)
-  // {
-  //   var f = DateFormat("dd-MM-yyyy");
-  //   return f.format(dm);
-  // }
+  String setDateFormat(DateTime dm)
+  {
+    var f = DateFormat("dd-MM-yyyy");
+    return f.format(dm);
+  }
+
+  TimeOfDay timeOfDay=TimeOfDay.now();
+  void changetime(TimeOfDay t1)
+  {
+    timeOfDay=t1;
+    update();
+  }
 
 
   // RxString selct='Income'.obs
