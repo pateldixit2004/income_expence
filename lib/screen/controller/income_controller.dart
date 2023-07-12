@@ -13,6 +13,9 @@ class Incomecontroller extends GetxController
 {
   RxList dataList=[].obs;
   RxInt indexbottom=0.obs;
+  RxDouble sum=0.0.obs;
+
+
   List screenList=[
     HomeScreen(),
     IncomeScreen(),
@@ -51,12 +54,24 @@ class Incomecontroller extends GetxController
   }
 
 
-  // RxString selct='Income'.obs
-
-  RxList expanceList=[
+  RxString inves="Food".obs;
+  RxList<String> expanceList=[
     'Education',"Food","Home maintance","Salary","Investment"
   ].obs;
 
+
+
+
   RxString selctExpance="Income".obs;
 
+
+  Future<void> getFiler(String categery)
+  async {
+    dataList.value=await  DBhelper.dBhelper.filer(categery);
+  }
+
+  void changeIncome()
+  {
+
+  }
 }

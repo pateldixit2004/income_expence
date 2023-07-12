@@ -42,7 +42,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:  Color(0xff429690),
+          backgroundColor: Color(0xff429690),
           title: Text(m1["option"] == 0 ? "update" : "Income"),
           actions: [
             IconButton(
@@ -53,7 +53,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2050));
                 // controller.datetime.value = picker as String;
-                controller.datetime.value=controller.setDateFormat(picker!);
+                controller.datetime.value = controller.setDateFormat(picker!);
               },
               icon: Icon(Icons.calendar_month),
             ),
@@ -64,7 +64,6 @@ class _IncomeScreenState extends State<IncomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-
                 /*image*/
                 // Obx(
                 //   () => controller.imgPath!.isNotEmpty
@@ -130,44 +129,88 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                ListTile(leading: Text("Date",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () async {
-                        DateTime? picker = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2050));
-                        // controller.datetime.value = picker as String;
-                        controller.datetime.value=controller.setDateFormat(picker!);
-                      },
-                      icon: Icon(Icons.calendar_month),
-                    ),
-                    Obx(() =>  Text("${controller.datetime.value}")),
-                  ],
+                ListTile(
+                  leading: Text("Date",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold)),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  onPressed: () async {
+                    DateTime? picker = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2050));
+                    // controller.datetime.value = picker as String;
+                    controller.datetime.value =
+                        controller.setDateFormat(picker!);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          // DateTime? picker = await showDatePicker(
+                          //     context: context,
+                          //     initialDate: DateTime.now(),
+                          //     firstDate: DateTime(2000),
+                          //     lastDate: DateTime(2050));
+                          // // controller.datetime.value = picker as String;
+                          // controller.datetime.value =
+                          //     controller.setDateFormat(picker!);
+                        },
+                        icon: Icon(Icons.calendar_month,color: Colors.black,),
+                      ),
+                      Obx(() => Text("${controller.datetime.value}",style: TextStyle( color: Colors.black,),)),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                ListTile(leading: Text("Time",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () async {
-                        TimeOfDay? t1=await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                        controller.changetime(t1!);
-                      },
-                      icon: Icon(Icons.watch_later_outlined),
-                    ),
-                    Text("${controller.timeOfDay}"),
-                  ],
+                ListTile(
+                  leading: Text("Time",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold)),
                 ),
-                ListTile(leading: Text("Staus",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),),
+
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+
+                  onPressed: () async {
+                    TimeOfDay? t1 = await showTimePicker(
+                        context: context, initialTime: TimeOfDay.now());
+                    controller.changetime(t1!);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          // TimeOfDay? t1 = await showTimePicker(
+                          //     context: context, initialTime: TimeOfDay.now());
+                          // controller.changetime(t1!);
+                        },
+                        icon: Icon(Icons.watch_later_outlined, color: Colors.black,),
+                      ),
+                      Text("${controller.timeOfDay}",style: TextStyle( color: Colors.black,),),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Text(
+                    "Staus",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
 
                 Obx(
                   () => RadioListTile(
@@ -191,14 +234,59 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     title: Text("expance"),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  leading: Text(
+                    "Name",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+
+                Obx(
+                      () =>  Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+
+                              borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.black54)
+                          ),
+                          child: DropdownButton(
+
+                            dropdownColor: Color(0x7435966D),
+
+
+                            isExpanded: true,
+                    underline: SizedBox(),
+                    value: controller.inves.value,
+                    items: controller.expanceList
+                            .map((element) => DropdownMenuItem(
+                          child: Center(child: Text("$element",style: TextStyle(color: Colors.black),)),
+                          value: element,
+                    ))
+                            .toList(),
+                    onChanged: (value) {
+                          controller.inves.value=value!;
+                    },
+                  ),
+                        ),
+                      ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     if (m1["option"] == 0) {
-
-                      if(controller.imgPath!.value.isEmpty)
-                        {
-                          controller.imgUnit = controller.dataList[m1['index']]['img'];
-                        }
+                      if (controller.imgPath!.value.isEmpty) {
+                        controller.imgUnit =
+                            controller.dataList[m1['index']]['img'];
+                      }
 
                       IncomeModel model = IncomeModel(
                         id: controller.dataList[m1['index']]['id'],
@@ -207,6 +295,8 @@ class _IncomeScreenState extends State<IncomeScreen> {
                         date: controller.datetime.value,
                         time: "${controller.timeOfDay}",
                         status: controller.selctExpance.value,
+                        categery: controller.inves.value,
+
                         imgUnit: controller.imgUnit,
                       );
                       DBhelper.dBhelper.update(model);
@@ -218,6 +308,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           status: controller.selctExpance.value,
                           time: "${controller.timeOfDay}",
                           date: controller.datetime.value,
+                          categery: controller.inves.value,
                           imgUnit: controller.imgUnit);
                       DBhelper.dBhelper.insertdb(model: model);
                     }
@@ -225,7 +316,10 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     controller.getData();
                     Get.back();
                   },
-                  child: Text("Sumit"),style: ElevatedButton.styleFrom(backgroundColor:   Color(0xff429690),),
+                  child: Text("Sumit"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff429690),
+                  ),
                 ),
 
                 // Container(
