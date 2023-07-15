@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Incomecontroller controller = Get.put(Incomecontroller());
-  Map m1={};
+  Map m1 = {};
   var sum;
 
   @override
@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Color(0xff429690),
           actions: [
-
             // IconButton(onPressed: () {
             //   controller.getFiler(controller.dataList[m1[0]]['categery']);
             // }, icon: Icon(Icons.search_rounded))
@@ -37,6 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Column(
           children: [
+            TextField(
+              decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        controller
+                            .getFiler(controller.dataList[m1[0]]['categery']);
+                      },
+                      icon: Icon(Icons.search_rounded))),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -48,17 +56,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.green,
-
                     ),
-                    child: Center(child: Column(children: [
-                      Text("Income"),
-                      // Text("₹ ${controller.dataList[index]['amount']}", style: TextStyle(
-                      //     color: controller.dataList[index]['status'] ==
-                      //         "Income"
-                      //         ? Colors.green
-                      //         : Colors.red,fontWeight: FontWeight.bold),),
-
-                    ],),),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Text("Income"),
+                          // Text("₹ ${controller.dataList[index]['amount']}", style: TextStyle(
+                          //     color: controller.dataList[index]['status'] ==
+                          //         "Income"
+                          //         ? Colors.green
+                          //         : Colors.red,fontWeight: FontWeight.bold),),
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(
                     width: 2.w,
@@ -70,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.red,
                     ),
-                    child: Center(child: Text("Exoance")),
+                    child: Center(child: Text("Expance")),
                   )
                 ],
               ),
@@ -91,65 +101,78 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                        onDoubleTap: () {
-
-                        },
-                        onLongPress: () {
-                           },
+                        onDoubleTap: () {},
+                        onLongPress: () {},
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-
-                              Container(
-                                // height: 70,
-                                width: 100.w,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("${controller.dataList[index]['categery']}-(${controller.dataList[index]['note']})",style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text("₹ ${controller.dataList[index]['amount']}", style: TextStyle(
-                                            color: controller.dataList[index]['status'] ==
-                                                "Income"
-                                                ? Colors.green
-                                                : Colors.red,fontWeight: FontWeight.bold),),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("${controller.dataList[index]['data']}"),
-                                       SizedBox(
-                                         child: Row(
-                                           children: [
-                                             IconButton(onPressed: () {
-                                               Get.toNamed("/income",
-                                                   arguments: {"option": 0, "index": index});
-
-                                             }, icon: Icon(Icons.update)),
-                                             IconButton(onPressed: () {
-                                               DBhelper.dBhelper
-                                                   .delete(controller.dataList[index]['id']);
-                                               controller.getData();
-
-
-                                             }, icon: Icon(Icons.delete_outline))
-                                           ],
-                                         ),
-                                       )
-                                      ],
-                                    ),
-
-
-                                  ],
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  // height: 70,
+                                  width: 100.w,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "${controller.dataList[index]['categery']}-(${controller.dataList[index]['note']})",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "₹ ${controller.dataList[index]['amount']}",
+                                            style: TextStyle(
+                                                color:
+                                                    controller.dataList[index]
+                                                                ['status'] ==
+                                                            "Income"
+                                                        ? Colors.green
+                                                        : Colors.red,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                              "${controller.dataList[index]['data']}"),
+                                          SizedBox(
+                                            child: Row(
+                                              children: [
+                                                IconButton(
+                                                    onPressed: () {
+                                                      Get.toNamed("/income",
+                                                          arguments: {
+                                                            "option": 0,
+                                                            "index": index
+                                                          });
+                                                    },
+                                                    icon: Icon(Icons.update)),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      DBhelper.dBhelper.delete(
+                                                          controller.dataList[
+                                                              index]['id']);
+                                                      controller.getData();
+                                                    },
+                                                    icon: Icon(
+                                                        Icons.delete_outline))
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ));
+                              ],
+                            )));
                   },
                   itemCount: controller.dataList.length,
                 ),
@@ -169,55 +192,56 @@ class _HomeScreenState extends State<HomeScreen> {
 
   ListTile buildListTile(int index) {
     return ListTile(
-                          // leading: CircleAvatar(
-                          //   radius: 50,
-                          //   backgroundImage:
-                          //       MemoryImage(controller.dataList[index]['img']),
-                          // ),
-                          title:
-                              Text("${controller.dataList[index]['note']}"),
-                          // leading: Text(
-                          //   controller.dataList[index]['status'],
-                          //   style: TextStyle(
-                          //       color: controller.dataList[index]['status'] ==
-                          //               "Income"
-                          //           ? Colors.green
-                          //           : Colors.red),
-                          // ),
-                          subtitle:
-                              Text("${controller.dataList[index]['categery']}"),
-                            trailing: Text("₹ ${controller.dataList[index]['amount']}", style: TextStyle(
-                          color: controller.dataList[index]['status'] ==
-                                  "Income"
-                              ? Colors.green
-                              : Colors.red,fontWeight: FontWeight.bold),),
-                          // trailing: controller.dataList[index]['status'] == 'Income' ? Row(
-                          //         children: [
-                          //           Icon(Icons.add),
-                          //           Text(
-                          //             "${controller.dataList[index]['amount']}",
-                          //             style: TextStyle(
-                          //                 color: controller.dataList[index]
-                          //                             ['status'] ==
-                          //                         "Income"
-                          //                     ? Colors.lightGreen
-                          //                     : Colors.redAccent),
-                          //           )
-                          //         ],
-                          //       ) : Row(
-                          //         children: [
-                          //           Icon(Icons.minimize),
-                          //           Text(
-                          //             "${controller.dataList[index]['amount']}",
-                          //             style: TextStyle(
-                          //                 color: controller.dataList[index]
-                          //                             ['status'] ==
-                          //                         "Income"
-                          //                     ? Colors.lightGreen
-                          //                     : Colors.redAccent),
-                          //           )
-                          //         ],
-                          //       ),
-                        );
+      // leading: CircleAvatar(
+      //   radius: 50,
+      //   backgroundImage:
+      //       MemoryImage(controller.dataList[index]['img']),
+      // ),
+      title: Text("${controller.dataList[index]['note']}"),
+      // leading: Text(
+      //   controller.dataList[index]['status'],
+      //   style: TextStyle(
+      //       color: controller.dataList[index]['status'] ==
+      //               "Income"
+      //           ? Colors.green
+      //           : Colors.red),
+      // ),
+      subtitle: Text("${controller.dataList[index]['categery']}"),
+      trailing: Text(
+        "₹ ${controller.dataList[index]['amount']}",
+        style: TextStyle(
+            color: controller.dataList[index]['status'] == "Income"
+                ? Colors.green
+                : Colors.red,
+            fontWeight: FontWeight.bold),
+      ),
+      // trailing: controller.dataList[index]['status'] == 'Income' ? Row(
+      //         children: [
+      //           Icon(Icons.add),
+      //           Text(
+      //             "${controller.dataList[index]['amount']}",
+      //             style: TextStyle(
+      //                 color: controller.dataList[index]
+      //                             ['status'] ==
+      //                         "Income"
+      //                     ? Colors.lightGreen
+      //                     : Colors.redAccent),
+      //           )
+      //         ],
+      //       ) : Row(
+      //         children: [
+      //           Icon(Icons.minimize),
+      //           Text(
+      //             "${controller.dataList[index]['amount']}",
+      //             style: TextStyle(
+      //                 color: controller.dataList[index]
+      //                             ['status'] ==
+      //                         "Income"
+      //                     ? Colors.lightGreen
+      //                     : Colors.redAccent),
+      //           )
+      //         ],
+      //       ),
+    );
   }
 }

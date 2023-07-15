@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:income_expence/screen/view/chat-screen.dart';
 import 'package:income_expence/screen/view/home_screen.dart';
 import 'package:income_expence/screen/view/income_screen.dart';
+import 'package:income_expence/screen/view/line_chart.dart';
+import 'package:income_expence/screen/view/other_chart.dart';
 import 'package:income_expence/utils/db_helper.dart';
 import 'package:intl/intl.dart';
 
@@ -18,9 +21,9 @@ class Incomecontroller extends GetxController
 
   List screenList=[
     HomeScreen(),
-    IncomeScreen(),
-    IncomeScreen(),
-    IncomeScreen(),
+    ChatScreen(),
+    LineChatScreen(),
+    OtherChatScreen(),
   ];
 
   RxString? imgPath="".obs;

@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  chart_sparkline:
+    dependency: "direct main"
+    description:
+      name: chart_sparkline
+      sha256: "10c68b0062056471bd64afccb13cb5bcad6edc087b4f939991094bc68af4d673"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.13"
   clock:
     dependency: transitive
     description:
@@ -288,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  multi_charts:
+    dependency: "direct main"
+    description:
+      name: multi_charts
+      sha256: a83edcfadb364a3fa4e140648d6ac48da5f93a22b3620efca814e6f34c50e92d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   path:
     dependency: transitive
     description:
@@ -344,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.7"
+  pie_chart:
+    dependency: "direct main"
+    description:
+      name: pie_chart
+      sha256: "5dba6d0eb4718e8ed00a9079361cd8947c3f84ac5a5d76f05a27f4ec5e27589e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.2"
   platform:
     dependency: transitive
     description:

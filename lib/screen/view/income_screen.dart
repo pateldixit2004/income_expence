@@ -137,7 +137,8 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           fontWeight: FontWeight.bold)),
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   onPressed: () async {
                     DateTime? picker = await showDatePicker(
                         context: context,
@@ -162,9 +163,17 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           // controller.datetime.value =
                           //     controller.setDateFormat(picker!);
                         },
-                        icon: Icon(Icons.calendar_month,color: Colors.black,),
+                        icon: Icon(
+                          Icons.calendar_month,
+                          color: Colors.black,
+                        ),
                       ),
-                      Obx(() => Text("${controller.datetime.value}",style: TextStyle( color: Colors.black,),)),
+                      Obx(() => Text(
+                            "${controller.datetime.value}",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          )),
                     ],
                   ),
                 ),
@@ -180,8 +189,8 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ),
 
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   onPressed: () async {
                     TimeOfDay? t1 = await showTimePicker(
                         context: context, initialTime: TimeOfDay.now());
@@ -196,9 +205,17 @@ class _IncomeScreenState extends State<IncomeScreen> {
                           //     context: context, initialTime: TimeOfDay.now());
                           // controller.changetime(t1!);
                         },
-                        icon: Icon(Icons.watch_later_outlined, color: Colors.black,),
+                        icon: Icon(
+                          Icons.watch_later_outlined,
+                          color: Colors.black,
+                        ),
                       ),
-                      Text("${controller.timeOfDay}",style: TextStyle( color: Colors.black,),),
+                      Text(
+                        "${controller.timeOfDay}",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -248,34 +265,33 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ),
 
                 Obx(
-                      () =>  Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-
-                              borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.black54)
-                          ),
-                          child: DropdownButton(
-
-                            dropdownColor: Color(0x7435966D),
-
-
-                            isExpanded: true,
-                    underline: SizedBox(),
-                    value: controller.inves.value,
-                    items: controller.expanceList
+                  () => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.black54)),
+                      child: DropdownButton(
+                        dropdownColor: Color(0x7435966D),
+                        isExpanded: true,
+                        underline: SizedBox(),
+                        value: controller.inves.value,
+                        items: controller.expanceList
                             .map((element) => DropdownMenuItem(
-                          child: Center(child: Text("$element",style: TextStyle(color: Colors.black),)),
-                          value: element,
-                    ))
+                                  child: Center(
+                                      child: Text(
+                                    "$element",
+                                    style: TextStyle(color: Colors.black),
+                                  )),
+                                  value: element,
+                                ))
                             .toList(),
-                    onChanged: (value) {
-                          controller.inves.value=value!;
-                    },
-                  ),
-                        ),
+                        onChanged: (value) {
+                          controller.inves.value = value!;
+                        },
                       ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -296,7 +312,6 @@ class _IncomeScreenState extends State<IncomeScreen> {
                         time: "${controller.timeOfDay}",
                         status: controller.selctExpance.value,
                         categery: controller.inves.value,
-
                         imgUnit: controller.imgUnit,
                       );
                       DBhelper.dBhelper.update(model);

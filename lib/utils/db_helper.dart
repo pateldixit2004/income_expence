@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DBhelper {
   static DBhelper dBhelper = DBhelper();
+
   Database? database;
   final String Dbpath = "database.db";
   String datatable = 'datatable';
@@ -42,8 +43,15 @@ class DBhelper {
   Future<void> insertdb({IncomeModel? model}) async {
     // database=await  instance.da
     database = await checkDb();
-    await database!
-        .insert('$datatable', {"note": model!.note, "amount": model.amount,"img":model.imgUnit,"data":model.date,"time":model.time,"status":model.status,"categery":model.categery});
+    await database!.insert('$datatable', {
+      "note": model!.note,
+      "amount": model.amount,
+      "img": model.imgUnit,
+      "data": model.date,
+      "time": model.time,
+      "status": model.status,
+      "categery": model.categery
+    });
   }
 
   Future<List<Map>> readDb() async {
@@ -60,16 +68,25 @@ class DBhelper {
 
   Future<void> update(IncomeModel model) async {
     database = await checkDb();
-    database!.update(datatable, {"amount": model.amount, "note": model.note,"img":model.imgUnit,"data":model.date,"time":model.time,"status":model.status,"categery":model.categery}, where: "id=?", whereArgs: [model.id]);
+    database!.update(
+        datatable,
+        {
+          "amount": model.amount,
+          "note": model.note,
+          "img": model.imgUnit,
+          "data": model.date,
+          "time": model.time,
+          "status": model.status,
+          "categery": model.categery
+        },
+        where: "id=?",
+        whereArgs: [model.id]);
   }
 
-
-  Future<List<Map>> filer(String categery)
-  async {
-    database=await checkDb();
-    String quary="SELECT * FROM $datatable WHERE categery='Food' ";
-    List<Map> l1=await database!.rawQuery(quary);
+  Future<List<Map>> filer(String categery) async {
+    database = await checkDb();
+    String quary = "SELECT * FROM $datatable WHERE categery ='$categery'  ";
+    List<Map> l1 = await database!.rawQuery(quary);
     return l1;
   }
-
 }
