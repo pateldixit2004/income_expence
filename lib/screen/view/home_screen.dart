@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Incomecontroller controller = Get.put(Incomecontroller());
+  TextEditingController txtfiler=TextEditingController();
   Map m1 = {};
   var sum;
 
@@ -36,14 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        controller
-                            .getFiler(controller.dataList[m1[0]]['categery']);
-                      },
-                      icon: Icon(Icons.search_rounded))),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: txtfiler,
+
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          txtfiler.text.isEmpty?controller.getData():controller.getFiler(txtfiler.text);
+
+                          // controller.getFiler(txtfiler.text);
+                        },
+                        icon: Icon(Icons.search_rounded))),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -58,16 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.green,
                     ),
                     child: Center(
-                      child: Column(
-                        children: [
-                          Text("Income"),
-                          // Text("₹ ${controller.dataList[index]['amount']}", style: TextStyle(
-                          //     color: controller.dataList[index]['status'] ==
-                          //         "Income"
-                          //         ? Colors.green
-                          //         : Colors.red,fontWeight: FontWeight.bold),),
-                        ],
-                      ),
+                      child: Text("Income"),
                     ),
                   ),
                   SizedBox(

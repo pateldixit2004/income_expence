@@ -7,7 +7,6 @@ import 'package:income_expence/screen/view/chat-screen.dart';
 import 'package:income_expence/screen/view/home_screen.dart';
 import 'package:income_expence/screen/view/income_screen.dart';
 import 'package:income_expence/screen/view/line_chart.dart';
-import 'package:income_expence/screen/view/other_chart.dart';
 import 'package:income_expence/utils/db_helper.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +22,7 @@ class Incomecontroller extends GetxController
     HomeScreen(),
     ChatScreen(),
     LineChatScreen(),
-    OtherChatScreen(),
+    // OtherChatScreen(),
   ];
 
   RxString? imgPath="".obs;
@@ -71,6 +70,7 @@ class Incomecontroller extends GetxController
   Future<void> getFiler(String categery)
   async {
     dataList.value=await  DBhelper.dBhelper.filer(categery);
+    print("=============================${dataList.length}================================");
   }
 
   void changeIncome()

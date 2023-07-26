@@ -85,7 +85,7 @@ class DBhelper {
 
   Future<List<Map>> filer(String categery) async {
     database = await checkDb();
-    String quary = "SELECT * FROM $datatable WHERE categery ='$categery'  ";
+    String quary = "SELECT * FROM $datatable WHERE categery ='$categery'";
     List<Map> l1 = await database!.rawQuery(quary);
     return l1;
   }
