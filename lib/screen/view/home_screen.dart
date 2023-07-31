@@ -58,27 +58,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: 50,
+                    height: 70,
                     width: 45.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.green,
                     ),
-                    child: Center(
-                      child: Text("Income"),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Center(
+                          child: Text("Income",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
+                        ),
+                        Text("10000"),
+                      ],
                     ),
                   ),
                   SizedBox(
                     width: 2.w,
                   ),
                   Container(
-                    height: 50,
+                    height: 70,
                     width: 45.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.red,
                     ),
-                    child: Center(child: Text("Expance")),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Center(child: Text("Expance",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                        Text("2000"),
+                      ],
+                    ),
                   )
                 ],
               ),
